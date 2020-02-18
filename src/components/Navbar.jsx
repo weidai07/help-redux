@@ -45,7 +45,7 @@ export default function Navbar() {
       <ul>
         <Link to="/"><li style={listElements} >Home</li></Link>
         <Link to="/newticket"><li style={listElements} >Create Ticket</li></Link>
-        <Link to="/test"><li style={listElements} >Grid Test</li></Link>
+        <Link to="/test"><li style={listElements} >Nothing</li></Link>
       </ul>
       <input
         type='text'
