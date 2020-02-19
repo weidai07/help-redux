@@ -10,20 +10,25 @@ class NewTicketControl extends React.Component {
 		this.state = {
 			formVisibleOnPage: false
 		};
-		this.handleTroubleshootingConfirmation = this.handleTroubleshootingConfirmation.bind(this);
+		this.handleDisplayForm = this.handleDisplayForm.bind(this);
 	}
 
-	handleTroubleshootingConfirmation() {
+	handleDisplayForm() {
 		this.setState({ formVisibleOnPage: true });
 	}
 
 	render() {
 		let currentlyVisibleContent = null;
 		if (this.state.formVisibleOnPage) {
-			currentlyVisibleContent = <NewTicketForm onNewTicketCreation={this.props.onNewTicketCreation}/>;
+
+			// onSubmitNewTicketForm is passed in from App to NewTicketControl to NewTicketForm .It is passing the callback 
+			// function "handleAddingNewTicketToList" down through the tree into the function handleNewTicketFormSubmission
+			// where it then called while passing all the ref values from the form fields. 
+			currentlyVisibleContent = <NewTicketForm
+				onSubmitNewTicketForm={this.props.onSubmitNewTicketForm} />;
 		} else {
 			currentlyVisibleContent = <ConfirmationQuestions
-				onTroubleshootingConfirmation={this.handleTroubleshootingConfirmation} />;
+				onSubmitQuestionsAnswered={this.handleDisplayForm} />;
 		}
 		return (
 			<div>
@@ -34,7 +39,7 @@ class NewTicketControl extends React.Component {
 }
 
 NewTicketControl.propTypes = {
-	onNewTicketCreation: PropTypes.func
+	onSubmitNewTicketForm: PropTypes.func
 };
 
 export default NewTicketControl;

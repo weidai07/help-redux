@@ -31,9 +31,13 @@ class App extends React.Component {
         <Navbar />
         <Header />
         <Switch>
-          <Route exact path='/' render={()=><TicketList ticketList={this.state.masterTicketList} />} />
-          <Route path='/newticket' render={() => <NewTicketControl onNewTicketCreation={this.handleAddingNewTicketToList} />} />
-          <Route component={Error404} />>
+          <Route exact path='/' render={() => <TicketList 
+            ticketList={this.state.masterTicketList} />} />
+
+          <Route path='/newticket' render={() => <NewTicketControl 
+            onSubmitNewTicketForm={this.handleAddingNewTicketToList} />} />
+
+          <Route component={Error404} />
         </Switch>
       </div>
     );
@@ -48,38 +52,35 @@ export default App;
 
 
 
-// This is how to use CSS modules for global scope.
 
-// function App() {
-//   return (
-//    <div>
-//       <style jsx global>{`
-//         body {
-//           font-family: Helvetica;
-//         }
-//         .box {
-//           border: none;
-//           display: block;
-//           border-bottom: 2px solid #fff;
-//           margin-bottom: 10px;
-//         }
-//         .box:hover {
-//           border-bottom: 2px solid #ccc;
-//           outline: 0;
-//         }
-//         a {
-//           color: #888;
-//           text-decoration: none;
-//         }
-//       `}</style>
-//       <div style={{margin: '19px auto 0', width: 142}}>
-//         <a href="https://medium.com/" target="_blank">
-//           <div className="box">
-//              <h1>this content will change on hover because we're using styled-jsx! It would even change if our div with className 'box' was in a nested component! So cool!</h1>
-//           </div>
-//         </a>
-//       </div>
-//   </div>
-//   );
-// }
 
+
+// App.jsx
+
+
+
+//   <Route path='/newticket' render={() => <NewTicketControl 
+//     onSubmitNewTicketForm={this.handleAddingNewTicketToList} />} />
+
+
+
+// NewTicketControl
+
+
+
+// if (this.state.formVisibleOnPage) {
+//   currentlyVisibleContent = <NewTicketForm
+//     onSubmitNewTicketForm={this.props.onSubmitNewTicketForm} />;
+
+
+
+// NewTicketForm
+
+
+//  function handleNewTicketFormSubmission(event) {
+//     event.preventDefault();
+//     props.onSubmitNewTicketForm({ names: _names.value, location: _location.value, issue: _issue.value });
+//     _names.value = '';
+//     _location.value = '';
+//     _issue.value = '';
+//   }
