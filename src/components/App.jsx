@@ -15,9 +15,11 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      masterTicketList: []
+      masterTicketList: [],
+      selectedTicket: null
     };
     this.handleAddingNewTicketToList = this.handleAddingNewTicketToList.bind(this);
+    this.handleChangingSelectedTicket = this.handleChangingSelectedTicket.bind(this);
   }
 
 
@@ -65,12 +67,22 @@ class App extends React.Component {
     this.setState({ masterTicketList: newMasterTicketList })
   }
 
+  // This is passed down through props to the NewTicketForm, and then called when a user
+  // clicks on the form submit button
 
   handleAddingNewTicketToList(newTicket) {
     newTicket.formattedWaitTime = (newTicket.timeOpen).fromNow(true)
     this.setState({
       masterTicketList: [...this.state.masterTicketList, newTicket]
     });
+  }
+
+  // This method is passed down through props to TicketDetailPage, and is called when an
+  // admin clicks on any given ticket
+
+  handleChangingSelectedTicket(ticket){
+    console.log("I am inside the handleChangingSelectedTicket");
+    this.setState({selectedTicket: ticket});
   }
 
 
@@ -88,7 +100,11 @@ class App extends React.Component {
           <Route path='/newticket' render={() => <NewTicketControl
             onSubmitNewTicketForm={this.handleAddingNewTicketToList} />} />
 
-          <Route path='/admin' render={(props) => <Admin ticketList={this.state.masterTicketList} currentRouterPath={props.location.pathname} />} />
+          <Route path='/admin' render={(props) => <Admin 
+            ticketList={this.state.masterTicketList} 
+            currentRouterPath={props.location.pathname} 
+            onTicketSelection={this.handleChangingSelectedTicket}
+            selectedTicket={this.state.selectedTicket} />} />
 
           <Route component={Error404} />
         </Switch>
