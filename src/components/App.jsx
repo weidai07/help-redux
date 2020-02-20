@@ -5,7 +5,8 @@ import NewTicketControl from './NewTicketControl';
 import Error404 from './Error404';
 import Header from './Header';
 import Navbar from './Navbar';
-
+import blueBg from '../assets/images/blue.jpg';
+import Admin from './Admin';
 
 
 class App extends React.Component {
@@ -19,17 +20,67 @@ class App extends React.Component {
     this.handleAddingNewTicketToList = this.handleAddingNewTicketToList.bind(this);
   }
 
-  handleAddingNewTicketToList(newTicket) {
-    var newMasterTicketList = this.state.masterTicketList.slice();
-    newMasterTicketList.push(newTicket);
-    this.setState({ masterTicketList: newMasterTicketList });
+
+  componentDidMount() {
+    this.waitTimeUpdateTimer = setInterval(() =>
+      this.updateTicketElapsedWaitTime(),
+      60000
+    );
   }
+
+  componentWillUnmount() {
+    clearInterval(this.waitTimeUpdateTimer);
+  }
+
+  // componentWillMount() {
+  //   console.log('componentWillMount');
+  // }
+
+  // componentWillReceiveProps() {
+  //   console.log('componentWillReceiveProps');
+  // }
+
+  // shouldComponentUpdate() {
+
+  //   //View this is the console to watch it at work. Try changing value to false
+  //   console.log('shouldComponentUpdate');
+  //   return true;
+  // }
+
+  // componentWillUpdate() {
+  //   console.log('componentWillUpdate');
+  // }
+
+  // componentDidUpdate() {
+  //   console.log('componentDidUpdate');
+  // }
+
+
+  updateTicketElapsedWaitTime() {
+    console.log("check");
+    let newMasterTicketList = this.state.masterTicketList.slice();
+    newMasterTicketList.forEach((ticket) =>
+      ticket.formattedWaitTime = (ticket.timeOpen).fromNow(true)
+    );
+    this.setState({ masterTicketList: newMasterTicketList })
+  }
+
+
+  handleAddingNewTicketToList(newTicket) {
+    newTicket.formattedWaitTime = (newTicket.timeOpen).fromNow(true)
+    this.setState({
+      masterTicketList: [...this.state.masterTicketList, newTicket]
+    });
+  }
+
 
   render() {
     return (
       <div>
+
         <Navbar />
         <Header />
+
         <Switch>
           <Route exact path='/' render={() => <TicketList
             ticketList={this.state.masterTicketList} />} />
@@ -37,12 +88,22 @@ class App extends React.Component {
           <Route path='/newticket' render={() => <NewTicketControl
             onSubmitNewTicketForm={this.handleAddingNewTicketToList} />} />
 
+          <Route path='/admin' render={(props) => <Admin ticketList={this.state.masterTicketList} currentRouterPath={props.location.pathname} />} />
+
           <Route component={Error404} />
         </Switch>
+
+        <style global jsx>{`
+          body {
+            font-family:  Arial, Helvetica, sans-serif;
+            font-size: 18px;
+            background: url('${blueBg}');
+          }
+        `}</style>
+
       </div>
     );
   }
-
 }
 
 export default App;

@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import blueBg from '../assets/images/blue.jpg';
-import Navbar from './Navbar';
+import { v4 } from 'uuid'; // Library called to asign Unique ID's
+import Moment from 'moment'; // Library to work with time and dates
+// import blueBg from '../assets/images/blue.jpg';
+// import Navbar from './Navbar';
 
 
 function NewTicketForm(props) {
@@ -11,15 +13,14 @@ function NewTicketForm(props) {
 
   function handleNewTicketFormSubmission(event) {
     event.preventDefault();
-    props.onSubmitNewTicketForm({ names: _names.value, location: _location.value, issue: _issue.value });
+    props.onSubmitNewTicketForm({ names: _names.value, location: _location.value, issue: _issue.value, id: v4(), timeOpen: new Moment() });
     _names.value = '';
     _location.value = '';
     _issue.value = '';
   }
 
   return (
-    <div style={background}>
-    <Navbar />
+    <div>
       <div style={formContainer}>
         <form onSubmit={handleNewTicketFormSubmission}>
           <input style={pairNames}
@@ -50,24 +51,25 @@ NewTicketForm.propTypes = {
 export default NewTicketForm;
 
 
-var background = {
-  backgroundImage: `url(${blueBg})`,
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: '100% 100%',
-  position: 'absolute',
-  top: '0',
-  left: '0',
-  width: '100%',
-  height: '100%'
-};
+// var background = {
+//   backgroundImage: `url(${blueBg})`,
+//   backgroundRepeat: 'no-repeat',
+//   backgroundSize: '100% 100%',
+//   position: 'absolute',
+//   top: '0',
+//   left: '0',
+//   width: '100%',
+//   height: '100%'
+// };
 
 var formContainer = {
   backgroundColor: 'white',
   width: '400px',
   margin: '100px auto',
   height: '500px',
-  borderRadius: '3px'
-}
+  borderRadius: '3px',
+  border: '50px solid #ffc55b'
+};
 
 var pairNames = {
   border: '2px solid gray',
@@ -75,7 +77,7 @@ var pairNames = {
   height: '30px',
   margin: '20px',
   borderRadius: '3px'
-}
+};
 
 var locationInput = {
   border: '2px solid gray',
@@ -83,14 +85,14 @@ var locationInput = {
   height: '30px',
   margin: '20px',
   borderRadius: '3px'
-}
+};
 
 var issueInput = {
   border: '2px solid gray',
   width: '350px',
   height: '200px',
   margin: '20px'
-}
+};
 
 var submitButton = {
   margin: '30px 0 50px 40%',
@@ -98,4 +100,4 @@ var submitButton = {
   backgroundColor: 'lightgray',
   borderRadius: '5px',
   padding: '2px 10px'
-}
+};

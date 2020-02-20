@@ -11,8 +11,8 @@ export default function Navbar() {
   var listElements = {
     float: 'left',
     fontSize: '20px',
-    border: '2px solid gray',
-    color: 'gray',
+    border: '2px solid #94c9ff',
+    color: '#daf3ff',
     padding: '6px',
     listStyleType: 'none',
     margin: '0px -1px'
