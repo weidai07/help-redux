@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+
 function Header() {
 
   var headerStyles = {
@@ -11,7 +12,7 @@ function Header() {
   return (
     <div>
       <h1 style={headerStyles} >Help Queue</h1>
-      <Link to="/">Home</Link> | <Link to="/newticket">Create Ticket</Link> | <Link to="/test">Test</Link>
+      <Link to="/">Home</Link> | <Link to="/newticket">Create Ticket</Link>
     </div>
   );
 }

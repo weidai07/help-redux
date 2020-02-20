@@ -31,10 +31,10 @@ class App extends React.Component {
         <Navbar />
         <Header />
         <Switch>
-          <Route exact path='/' render={() => <TicketList 
+          <Route exact path='/' render={() => <TicketList
             ticketList={this.state.masterTicketList} />} />
 
-          <Route path='/newticket' render={() => <NewTicketControl 
+          <Route path='/newticket' render={() => <NewTicketControl
             onSubmitNewTicketForm={this.handleAddingNewTicketToList} />} />
 
           <Route component={Error404} />
@@ -59,7 +59,7 @@ export default App;
 
 
 
-//   <Route path='/newticket' render={() => <NewTicketControl 
+//   < Route path = '/newticket' render = {() => <NewTicketControl
 //     onSubmitNewTicketForm={this.handleAddingNewTicketToList} />} />
 
 
@@ -77,7 +77,7 @@ export default App;
 // NewTicketForm
 
 
-//  function handleNewTicketFormSubmission(event) {
+//   function handleNewTicketFormSubmission(event) {
 //     event.preventDefault();
 //     props.onSubmitNewTicketForm({ names: _names.value, location: _location.value, issue: _issue.value });
 //     _names.value = '';

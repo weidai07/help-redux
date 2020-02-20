@@ -18,10 +18,3 @@ Ticket.propTypes = {
 };
 
 export default Ticket;
-
-
-
-
-
-
-
