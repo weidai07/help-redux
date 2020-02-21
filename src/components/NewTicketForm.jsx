@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { v4 } from 'uuid'; // Library called to asign Unique ID's
 import Moment from 'moment'; // Library to work with time and dates
 // import blueBg from '../assets/images/blue.jpg';
 // import Navbar from './Navbar';
@@ -13,7 +12,7 @@ function NewTicketForm(props) {
 
   function handleNewTicketFormSubmission(event) {
     event.preventDefault();
-    props.onSubmitNewTicketForm({ names: _names.value, location: _location.value, issue: _issue.value, id: v4(), timeOpen: new Moment() });
+    props.onSubmitNewTicketForm({ names: _names.value, location: _location.value, issue: _issue.value, timeOpen: new Moment() });
     _names.value = '';
     _location.value = '';
     _issue.value = '';

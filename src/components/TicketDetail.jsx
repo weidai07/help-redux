@@ -8,7 +8,7 @@ function TicketDetail(props) {
   };
 
   return (
-    <div style={background}>
+    <div>
       <hr />
       <h1>{props.selectedTicket.names} - {props.selectedTicket.location}</h1>
       <h2>Submitted {props.selectedTicket.formattedWaitTime} ago</h2>

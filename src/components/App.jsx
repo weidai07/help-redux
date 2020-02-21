@@ -7,6 +7,7 @@ import Header from './Header';
 import Navbar from './Navbar';
 import blueBg from '../assets/images/blue.jpg';
 import Admin from './Admin';
+import { v4 } from 'uuid';
 
 
 class App extends React.Component {
@@ -15,7 +16,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      masterTicketList: [],
+      masterTicketList: {},
       selectedTicket: null
     };
     this.handleAddingNewTicketToList = this.handleAddingNewTicketToList.bind(this);
@@ -34,59 +35,37 @@ class App extends React.Component {
     clearInterval(this.waitTimeUpdateTimer);
   }
 
-  // componentWillMount() {
-  //   console.log('componentWillMount');
-  // }
-
-  // componentWillReceiveProps() {
-  //   console.log('componentWillReceiveProps');
-  // }
-
-  // shouldComponentUpdate() {
-
-  //   //View this is the console to watch it at work. Try changing value to false
-  //   console.log('shouldComponentUpdate');
-  //   return true;
-  // }
-
-  // componentWillUpdate() {
-  //   console.log('componentWillUpdate');
-  // }
-
-  // componentDidUpdate() {
-  //   console.log('componentDidUpdate');
-  // }
-
 
   updateTicketElapsedWaitTime() {
-    console.log("check");
-    let newMasterTicketList = this.state.masterTicketList.slice();
-    newMasterTicketList.forEach((ticket) =>
-      ticket.formattedWaitTime = (ticket.timeOpen).fromNow(true)
-    );
-    this.setState({ masterTicketList: newMasterTicketList })
+    var newMasterTicketList = Object.assign({}, this.state.masterTicketList);
+    Object.keys(newMasterTicketList).forEach(ticketId => {
+      newMasterTicketList[ticketId].formattedWaitTime = (newMasterTicketList[ticketId].timeOpen).fromNow(true);
+    });
+    this.setState({ masterTicketList: newMasterTicketList });
   }
 
   // This is passed down through props to the NewTicketForm, and then called when a user
   // clicks on the form submit button
 
-  handleAddingNewTicketToList(newTicket) {
-    newTicket.formattedWaitTime = (newTicket.timeOpen).fromNow(true)
-    this.setState({
-      masterTicketList: [...this.state.masterTicketList, newTicket]
+  handleAddingNewTicketToList(newTicket){
+    var newTicketId = v4();
+    var newMasterTicketList = Object.assign({}, this.state.masterTicketList, {
+      [newTicketId]: newTicket
     });
+    newMasterTicketList[newTicketId].formattedWaitTime = newMasterTicketList[newTicketId].timeOpen.fromNow(true);
+    this.setState({masterTicketList: newMasterTicketList});
   }
 
   // This method is passed down through props to TicketDetailPage, and is called when an
   // admin clicks on any given ticket
 
-  handleChangingSelectedTicket(ticket){
-    console.log("I am inside the handleChangingSelectedTicket");
-    this.setState({selectedTicket: ticket});
+  handleChangingSelectedTicket(ticketId) {
+    this.setState({ selectedTicket: ticketId });
   }
 
 
   render() {
+    console.log("this.state.masterTicketList");
     return (
       <div>
 
@@ -99,10 +78,9 @@ class App extends React.Component {
 
           <Route path='/newticket' render={() => <NewTicketControl
             onSubmitNewTicketForm={this.handleAddingNewTicketToList} />} />
-
           <Route path='/admin' render={(props) => <Admin 
             ticketList={this.state.masterTicketList} 
-            currentRouterPath={props.location.pathname} 
+            currentRouterPath={props.location.pathname}
             onTicketSelection={this.handleChangingSelectedTicket}
             selectedTicket={this.state.selectedTicket} />} />
 
