@@ -25,7 +25,8 @@ class NewTicketControl extends React.Component {
 			// function "handleAddingNewTicketToList" down through the tree into the function handleNewTicketFormSubmission
 			// where it then called while passing all the ref values from the form fields. 
 			currentlyVisibleContent = <NewTicketForm
-				onSubmitNewTicketForm={this.props.onSubmitNewTicketForm} />;
+				// onSubmitNewTicketForm={this.props.onSubmitNewTicketForm} 
+			/>;
 		} else {
 			currentlyVisibleContent = <ConfirmationQuestions
 				onSubmitQuestionsAnswered={this.handleDisplayForm} />;
@@ -38,8 +39,8 @@ class NewTicketControl extends React.Component {
 	}
 }
 
-NewTicketControl.propTypes = {
-	onSubmitNewTicketForm: PropTypes.func
-};
+// NewTicketControl.propTypes = {
+// 	onSubmitNewTicketForm: PropTypes.func
+// };
 
 export default NewTicketControl;

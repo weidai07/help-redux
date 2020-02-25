@@ -1,18 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'moment'; // Library to work with time and dates
-// import blueBg from '../assets/images/blue.jpg';
-// import Navbar from './Navbar';
+import { connect } from 'react-redux';
+import { v4 } from 'uuid';
 
 
 function NewTicketForm(props) {
+
   let _names = null;
   let _location = null;
   let _issue = null;
 
   function handleNewTicketFormSubmission(event) {
     event.preventDefault();
-    props.onSubmitNewTicketForm({ names: _names.value, location: _location.value, issue: _issue.value, timeOpen: new Moment() });
+    // The below line implies this.props.dispatch();
+    const { dispatch } = props;
+    const action = {
+      type: 'ADD_TICKET',
+      id: v4(),
+      names: _names.value,
+      location: _location.value,
+      issue: _issue.value,
+      timeOpen: new Date().getTime()
+    }
+    dispatch(action)
+    // props.onSubmitNewTicketForm({ names: _names.value, location: _location.value, issue: _issue.value, timeOpen: new Moment() });
     _names.value = '';
     _location.value = '';
     _issue.value = '';
@@ -43,23 +55,20 @@ function NewTicketForm(props) {
   );
 }
 
-NewTicketForm.propTypes = {
-  onSubmitNewTicketForm: PropTypes.func
-};
+
+// NewTicketForm.propTypes = {
+//   onSubmitNewTicketForm: PropTypes.func
+// };
+
+
+NewTicketForm = connect()(NewTicketForm);
 
 export default NewTicketForm;
 
 
-// var background = {
-//   backgroundImage: `url(${blueBg})`,
-//   backgroundRepeat: 'no-repeat',
-//   backgroundSize: '100% 100%',
-//   position: 'absolute',
-//   top: '0',
-//   left: '0',
-//   width: '100%',
-//   height: '100%'
-// };
+
+
+// ------------------- All styling below -------------------
 
 var formContainer = {
   backgroundColor: 'white',

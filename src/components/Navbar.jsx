@@ -46,6 +46,7 @@ export default function Navbar() {
         <Link to="/"><li style={listElements} >Home</li></Link>
         <Link to="/newticket"><li style={listElements} >Create Ticket</li></Link>
         <Link to="/test"><li style={listElements} >Nothing</li></Link>
+        <Link to="/admin"><li style={listElements} >Admin</li></Link>
       </ul>
       <input
         type='text'

@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 function TicketDetail(props) {
 
   let background = {
-    backgroundColor: '#efb7b7'
+    backgroundColor: '#ffafaf'
   };
 
   return (
-    <div>
+    <div style={background}>
       <hr />
       <h1>{props.selectedTicket.names} - {props.selectedTicket.location}</h1>
       <h2>Submitted {props.selectedTicket.formattedWaitTime} ago</h2>

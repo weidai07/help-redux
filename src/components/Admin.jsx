@@ -4,6 +4,10 @@ import TicketList from './TicketList';
 import TicketDetail from './TicketDetail';
 
 function Admin(props) {
+
+    let background = {
+        backgroundColor: '#679dff'
+    };
     
     let optionalSelectedTicketContent = null;
     if (props.selectedTicket != null) {
@@ -12,7 +16,7 @@ function Admin(props) {
     }
 
     return (
-        <div>
+        <div style={background}>
             <h2>Admin</h2>
             {optionalSelectedTicketContent}
             <TicketList
