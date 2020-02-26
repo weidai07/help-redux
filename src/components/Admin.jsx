@@ -8,16 +8,29 @@ function Admin(props) {
     let background = {
         backgroundColor: '#679dff'
     };
-    
+
+    let footerAdmin = {
+        position: 'fixed',
+        bottom: '0',
+        left: '0',
+        width: '100%',
+        backgroundColor: '#e0d647',
+        textAlign: 'center',
+        marginBottom: '0'
+    };
+
+
+
     let optionalSelectedTicketContent = null;
     if (props.selectedTicket != null) {
-        optionalSelectedTicketContent =  <TicketDetail 
-            selectedTicket={props.ticketList[props.selectedTicket]}/>;
+        optionalSelectedTicketContent = <TicketDetail
+            selectedTicket={props.ticketList[props.selectedTicket]} />;
     }
 
     return (
         <div style={background}>
-            <h2>Admin</h2>
+
+            <h2 style={footerAdmin}>Admin</h2>
             {optionalSelectedTicketContent}
             <TicketList
                 ticketList={props.ticketList}

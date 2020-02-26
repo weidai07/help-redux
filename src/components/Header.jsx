@@ -6,13 +6,17 @@ function Header() {
 
   var headerStyles = {
     backgroundColor: 'cornflowerblue',
-    marginTop: '50px'
+    margin: '100px auto 100px auto',
+    // textAlign: 'center',
+    fontSize: '40px',
+    // display: 'inline-block',
+    padding: '10px'
   };
 
   return (
     <div>
       <h1 style={headerStyles} >Help Queue</h1>
-      <Link to="/">Home</Link> | <Link to="/newticket">Create Ticket</Link>
+      {/* <Link to="/">Home</Link> | <Link to="/newticket">Create Ticket</Link> */}
     </div>
   );
 }

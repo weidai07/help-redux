@@ -20,8 +20,8 @@ class App extends React.Component {
     this.state = {
       selectedTicket: null
     };
-    // this.handleAddingNewTicketToList = this.handleAddingNewTicketToList.bind(this);
-    // this.handleChangingSelectedTicket = this.handleChangingSelectedTicket.bind(this);
+
+    this.handleChangingSelectedTicket = this.handleChangingSelectedTicket.bind(this);
   }
 
 
@@ -31,6 +31,7 @@ class App extends React.Component {
       60000
     );
   }
+
 
   componentWillUnmount() {
     clearInterval(this.waitTimeUpdateTimer);
@@ -45,20 +46,6 @@ class App extends React.Component {
     // this.setState({ masterTicketList: newMasterTicketList });
   }
 
-  // This is passed down through props to the NewTicketForm, and then called when a user
-  // clicks on the form submit button
-
-  // handleAddingNewTicketToList(newTicket){
-  //   var newTicketId = v4();
-  //   var newMasterTicketList = Object.assign({}, this.state.masterTicketList, {
-  //     [newTicketId]: newTicket
-  //   });
-  //   newMasterTicketList[newTicketId].formattedWaitTime = newMasterTicketList[newTicketId].timeOpen.fromNow(true);
-  //   this.setState({masterTicketList: newMasterTicketList});
-  // }
-
-  // This method is passed down through props to TicketDetailPage, and is called when an
-  // admin clicks on any given ticket. 
 
   handleChangingSelectedTicket(ticketId) {
     this.setState({ selectedTicket: ticketId });
@@ -110,9 +97,9 @@ App.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    masterTicketList: state
-  }
-}
+    masterTicketList: state.masterTicketList
+  };
+};
 
 
 export default withRouter(connect(mapStateToProps)(App));
