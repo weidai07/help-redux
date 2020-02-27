@@ -1,20 +1,29 @@
 export default (state = {}, action) => {
-    switch (action.type) {
-        
-    case 'ADD_TICKET':
+  let newState;
+  const { names, location, issue, timeOpen, id, formattedWaitTime } = action;
 
-      const { names, location, issue, timeOpen, id } = action;
-      let newState = Object.assign({}, state, {
+  switch (action.type) {
+    case 'ADD_TICKET':
+      newState = Object.assign({}, state, {
         [id]: {
           names: names,
           location: location,
           issue: issue,
           timeOpen: timeOpen,
-          id: id
+          id: id,
+          formattedWaitTime: formattedWaitTime
         }
       });
       return newState;
+
+    case 'UPDATE_TIME':
+      const newTicket = Object.assign({}, state[id], { formattedWaitTime });
+      newState = Object.assign({}, state, {
+        [id]: newTicket
+      });
+      return newState;
+
     default:
       return state;
-    }
-  };
+  }
+};

@@ -4,16 +4,13 @@ import Moment from 'moment'; // Library to work with time and dates
 import { connect } from 'react-redux';
 import { v4 } from 'uuid';
 
-
 function NewTicketForm(props) {
-
   let _names = null;
   let _location = null;
   let _issue = null;
 
   function handleNewTicketFormSubmission(event) {
     event.preventDefault();
-    // The below line implies this.props.dispatch();
     const { dispatch } = props;
     const action = {
       type: 'ADD_TICKET',
@@ -21,15 +18,14 @@ function NewTicketForm(props) {
       names: _names.value,
       location: _location.value,
       issue: _issue.value,
-      timeOpen: new Date().getTime()
-    }
-    dispatch(action)
-    // props.onSubmitNewTicketForm({ names: _names.value, location: _location.value, issue: _issue.value, timeOpen: new Moment() });
+      timeOpen: new Moment(),
+      formattedWaitTime: new Moment().fromNow(true)
+    };
+    dispatch(action);
     _names.value = '';
     _location.value = '';
     _issue.value = '';
   }
-
   return (
     <div>
       <div style={formContainer}>
@@ -56,9 +52,9 @@ function NewTicketForm(props) {
 }
 
 
-// NewTicketForm.propTypes = {
-//   onSubmitNewTicketForm: PropTypes.func
-// };
+NewTicketForm.propTypes = {
+  dispatch: PropTypes.func
+};
 
 
 NewTicketForm = connect()(NewTicketForm);
